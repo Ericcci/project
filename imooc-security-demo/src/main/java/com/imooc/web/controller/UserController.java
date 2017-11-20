@@ -12,6 +12,7 @@ import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,11 @@ import io.swagger.annotations.ApiParam;
 @RequestMapping("/user")
 public class UserController {
 
+	@GetMapping("/me")
+	public Object getCurrentUser(Authentication authentication) {
+		return authentication;
+	}
+	
 	// @Valid 用于校验对象-->User.class中@NotBlank注解的password对象 (配合hibernate validator)
 	// @Valid 和 BindingResult一起使用
 	@PostMapping
